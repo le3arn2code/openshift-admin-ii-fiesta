@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-server-config
+  labels:
+    app: web-server
+    environment: production
+data:
+  server.host: "0.0.0.0"
+  server.port: "8080"
+  server.workers: "2"
+  environment.properties: |
+    ENV=production
+    LOG_LEVEL=info
+    MAX_MEMORY=512m

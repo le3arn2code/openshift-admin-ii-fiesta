@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-server-config
+  labels:
+    app: web-server
+    environment: production
+    version: "2.0"
+data:
+  server.host: "0.0.0.0"
+  server.port: "9090"
+  server.workers: "4"
+  environment.properties: |
+    ENV=production
+    LOG_LEVEL=debug
+    ENABLE_METRICS=true

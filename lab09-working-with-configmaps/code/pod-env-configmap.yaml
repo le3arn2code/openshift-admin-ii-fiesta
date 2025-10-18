@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-env-config
+  labels:
+    app: web-app
+spec:
+  containers:
+  - name: app-container
+    image: nginx:1.21
+    envFrom:
+      - configMapRef:
+          name: database-config
+      - configMapRef:
+          name: web-server-config
