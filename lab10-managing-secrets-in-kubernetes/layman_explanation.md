@@ -1,0 +1,2 @@
+### Layman Explanation
+Kubernetes Secrets store passwords, tokens, and API keys securely so you don't hardcode them in containers. They can be used as environment variables or files in your applications securely.
