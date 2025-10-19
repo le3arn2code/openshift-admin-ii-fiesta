@@ -1,0 +1,73 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: web-app-template
+  annotations:
+    description: "Template for a simple web application with DeploymentConfig, Service, and Route"
+    tags: "web,template,example"
+
+parameters:
+  - name: APP_NAME
+    description: Name of the application
+    required: true
+    value: web-app
+  - name: IMAGE
+    description: Container image to deploy
+    required: true
+    value: nginxinc/nginx-unprivileged:latest
+  - name: APP_PORT
+    description: Port that the container listens on
+    required: true
+    value: "8080"
+
+objects:
+  - apiVersion: apps.openshift.io/v1
+    kind: DeploymentConfig
+    metadata:
+      name: ${APP_NAME}
+      labels:
+        app: ${APP_NAME}
+    spec:
+      replicas: 1
+      selector:
+        app: ${APP_NAME}
+      template:
+        metadata:
+          labels:
+            app: ${APP_NAME}
+        spec:
+          containers:
+            - name: ${APP_NAME}
+              image: ${IMAGE}
+              ports:
+                - containerPort: 8080
+              resources:
+                limits:
+                  memory: 128Mi
+                  cpu: 100m
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: ${APP_NAME}
+      labels:
+        app: ${APP_NAME}
+    spec:
+      selector:
+        app: ${APP_NAME}
+      ports:
+        - name: http
+          protocol: TCP
+          port: 8080
+          targetPort: 8080
+
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      name: ${APP_NAME}
+    spec:
+      to:
+        kind: Service
+        name: ${APP_NAME}
+      port:
+        targetPort: http
