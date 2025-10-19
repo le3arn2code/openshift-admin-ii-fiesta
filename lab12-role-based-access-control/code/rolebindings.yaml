@@ -1,0 +1,41 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dev-binding
+  namespace: development
+subjects:
+- kind: ServiceAccount
+  name: dev-user
+  namespace: development
+roleRef:
+  kind: Role
+  name: dev-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prod-binding
+  namespace: production
+subjects:
+- kind: ServiceAccount
+  name: prod-user
+  namespace: production
+roleRef:
+  kind: Role
+  name: prod-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: test-binding
+  namespace: testing
+subjects:
+- kind: ServiceAccount
+  name: test-user
+  namespace: testing
+roleRef:
+  kind: Role
+  name: test-role
+  apiGroup: rbac.authorization.k8s.io

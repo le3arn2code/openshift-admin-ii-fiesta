@@ -1,0 +1,1 @@
+RBAC in Kubernetes controls user access—like giving developers edit rights, and testers view-only access.

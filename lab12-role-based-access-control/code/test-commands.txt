@@ -1,0 +1,3 @@
+kubectl auth can-i create pods --as=system:serviceaccount:development:dev-user -n development
+kubectl auth can-i get pods --as=system:serviceaccount:production:prod-user -n production
+kubectl auth can-i watch pods --as=system:serviceaccount:testing:test-user -n testing
