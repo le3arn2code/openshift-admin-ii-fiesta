@@ -1,0 +1,2 @@
+# Placeholder for grafana-jaeger-info.txt
+# (Full YAML available in lab16 main ZIP)

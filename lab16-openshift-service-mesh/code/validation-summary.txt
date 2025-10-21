@@ -1,0 +1,2 @@
+# Placeholder for validation-summary.txt
+# (Full YAML available in lab16 main ZIP)
