@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: buildah-build-push
+spec:
+  params:
+    - name: IMAGE
+      type: string
+    - name: DOCKERFILE
+      type: string
+      default: ./Dockerfile
+  workspaces:
+    - name: source
+  steps:
+    - name: build-and-push
+      image: registry.redhat.io/rhel8/buildah:latest
+      securityContext:
+        privileged: true
+      script: |
+        #!/bin/bash
+        set -e
+        cd $(workspaces.source.path)
+        buildah bud --format=oci -f $(params.DOCKERFILE) -t $(params.IMAGE) .
+        buildah push $(params.IMAGE)

@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: build-deploy-run-sample
+spec:
+  pipelineRef:
+    name: build-deploy-pipeline
+  params:
+    - name: git-url
+      value: https://github.com/le3arn2code/pipeline-demo-app.git
+    - name: git-revision
+      value: main
+    - name: image-name
+      value: image-registry.openshift-image-registry.svc:5000/pipeline-demo/demo-app:latest
+    - name: app-name
+      value: demo-app
+  workspaces:
+    - name: shared-workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
