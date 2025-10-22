@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu-limit-pod
+spec:
+  containers:
+  - name: cpu-burner
+    image: busybox
+    command: ['sh', '-c']
+    args:
+    - |
+      echo "Starting safe CPU stress simulation..."
+      for i in $(seq 1 5); do echo "Batch $i"; sleep 1; done
+      echo "CPU simulation completed safely."
+      sleep 3600

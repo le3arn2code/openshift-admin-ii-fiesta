@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fixed-cpu-limit-pod
+spec:
+  containers:
+  - name: cpu-optimized
+    image: busybox
+    command: ['sh', '-c']
+    args:
+    - |
+      echo "Running under optimized CPU limits..."
+      sleep 1
+      echo "CPU optimization complete."
+      sleep 3600

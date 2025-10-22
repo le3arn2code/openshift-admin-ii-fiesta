@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fixed-memory-pod
+spec:
+  containers:
+  - name: memory-safe
+    image: busybox
+    command: ['sh', '-c']
+    args:
+    - |
+      echo "Allocating safe memory size..."
+      dd if=/dev/zero of=/tmp/memory.tmp bs=1M count=20
+      echo "Memory allocation completed successfully"
+      sleep 3600

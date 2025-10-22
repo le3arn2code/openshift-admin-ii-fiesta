@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: storage-working-pod
+spec:
+  containers:
+  - name: app-container
+    image: busybox
+    command: ['sh', '-c']
+    args:
+    - |
+      echo "Writing to persistent storage..."
+      echo "Hello from persistent PVC!" > /data/test.txt
+      cat /data/test.txt
+      sleep 3600
+    volumeMounts:
+    - name: data-volume
+      mountPath: /data
+  volumes:
+  - name: data-volume
+    persistentVolumeClaim:
+      claimName: working-pvc

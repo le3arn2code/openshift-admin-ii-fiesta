@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: log-test-pod
+spec:
+  containers:
+  - name: log-container
+    image: busybox
+    command: ['sh', '-c']
+    args:
+    - |
+      echo "Starting application..."
+      sleep 10
+      echo "ERROR: Database connection failed"
+      sleep 5
+      echo "WARNING: Retrying connection..."
+      sleep 5
+      echo "FATAL: Unable to start service"
+      exit 1
+  restartPolicy: Never

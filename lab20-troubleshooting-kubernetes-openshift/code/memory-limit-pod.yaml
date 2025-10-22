@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memory-limit-pod
+spec:
+  containers:
+  - name: memory-consumer
+    image: busybox
+    command: ['sh', '-c']
+    args:
+    - |
+      echo "Simulating high memory use..."
+      dd if=/dev/zero of=/tmp/memory.tmp bs=1M count=60
+      echo "Finished writing ~60MB file"
+      sleep 3600
